@@ -112,7 +112,7 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:
             sys.exit()
-        elif event.key == pygame.K_SPACE:
+        elif event.key == pygame.K_SPACE and self.game_active:
             self._fire_bullet()
 
     def _check_keyup_events(self, event):
@@ -224,10 +224,10 @@ class AlienInvasion:
             # Create a new fleet and center the ship.
             self._create_fleet()
             self.ship.center_ship()
-
         else:
-                    self.game_active = False
-                    pygame.mouse.set_visible(True)   
+            self.game_active = False
+            pygame.mouse.set_visible(True)   
+
 
     def _check_aliens_bottom(self):
         """Check if any aliens have reached the bottom of the screen."""
