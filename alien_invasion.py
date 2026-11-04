@@ -173,7 +173,6 @@ class AlienInvasion:
         """Create the fleet of aliens."""
         # Make an alien.
         alien = Alien(self)
-        self.aliens.add(alien)
         # Spacing between aliens is one alien width.
         alien_width, alien_height = alien.rect.size
 
