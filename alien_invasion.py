@@ -47,6 +47,9 @@ class AlienInvasion:
         self._create_fleet()
 
         self.game_active = False
+        # Control Shot while holding space.
+        self.shooting = False
+        self.last_shot_time = 0
 
         # Make the Play button.
         self.play_button = Button(self, "Play")
@@ -113,7 +116,7 @@ class AlienInvasion:
         elif event.key == pygame.K_q:
             sys.exit()
         elif event.key == pygame.K_SPACE and self.game_active:
-            self._fire_bullet()
+             self.shooting = True
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
@@ -121,11 +124,22 @@ class AlienInvasion:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+        elif event.key == pygame.K_SPACE:
+            self.shooting = False
+
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _handle_shooting(self):
+        """Shot while holding space."""
+        if self.shooting:
+            now = pygame.time.get_ticks()
+            if now - self.last_shot_time >= self.settings.bullet_cooldown:
+                self._fire_bullet()
+                self.last_shot_time = now
 
     def _update_bullets(self):
         """Update position of bullets and get rid of old bullets."""
@@ -212,21 +226,17 @@ class AlienInvasion:
             # Decrement ships_left.
             self.stats.ships_left -= 1
             self.sb.prep_ships()
-
             # Pause.
             sleep(0.5)
-
             # Get rid of any remaining bullets and aliens.
             self.bullets.empty()
             self.aliens.empty()
-
             # Create a new fleet and center the ship.
             self._create_fleet()
             self.ship.center_ship()
         else:
             self.game_active = False
             pygame.mouse.set_visible(True)   
-
 
     def _check_aliens_bottom(self):
         """Check if any aliens have reached the bottom of the screen."""
@@ -237,15 +247,16 @@ class AlienInvasion:
                 break
 
     def run_game(self):
-            """Start the main loop for the game."""
-            while True:
-                self._check_events()
-                if self.game_active:
-                    self.ship.update()
-                    self._update_bullets()
-                    self._update_aliens()
-                self._update_screen()
-                self.clock.tick(60)
+        """Start the main loop for the game."""
+        while True:
+            self._check_events()
+            if self.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._handle_shooting()
+                self._update_aliens()
+            self._update_screen()
+            self.clock.tick(60)
 
 if __name__ == '__main__':
     # Make a game instance, and run the game.
