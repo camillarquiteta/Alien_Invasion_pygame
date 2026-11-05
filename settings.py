@@ -1,3 +1,4 @@
+
 class Settings:
     """Armazena configurações do Alien Invasion."""
 

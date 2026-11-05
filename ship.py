@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
+from sprites import load_ship_families
 class Ship(Sprite):
     '''Classe que gerencia nossa nave'''
     def __init__(self,ai_game):
@@ -11,8 +12,9 @@ class Ship(Sprite):
 
         '''Carrega a imagem e posiciona seu retangulo no jogo permitindo 
         que você controle a posição dela na tela e detecte colisões'''
-        self.image = pygame.image.load('images/ship.bmp')
-        self.rect: pygame.Rect = self.image.get_rect()
+        # Usa o primeiro design da sheet, no primeiro frame.
+        self.image = load_ship_families()[0][0]
+        self.rect = self.image.get_rect()
 
         '''Faz a nave começar do centro inferior da tela'''
         self.rect.midbottom = self.screen_rect.midbottom
