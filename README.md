@@ -74,3 +74,7 @@ python alien_invasion.py
 - Sons: OpenGameArt, licença CC0.
 - Livro base da versão 1.0: *Python Crash Course*, de Eric Matthes.
 - Engine: [pygame](https://www.pygame.org).
+
+![Versão 2.0](docs/versao-2.0.png)
+
+*Versão 2.0: tela adaptada para celular.*
