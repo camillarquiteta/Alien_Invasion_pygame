@@ -2,7 +2,9 @@
 
 Jogo de naves no formato de celular, feito em Python com pygame. Começou como estudo de programação orientada a objetos e de pygame, a partir de um exercício do livro *Python Crash Course*, e foi crescendo aos poucos.
 
-![Gameplay](docs/gameplay.gif)
+<p align="center">
+  <img src="docs/gameplay.gif" alt="Gameplay" width="300">
+</p>
 
 ## Versões
 
@@ -75,6 +77,10 @@ python alien_invasion.py
 - Livro base da versão 1.0: *Python Crash Course*, de Eric Matthes.
 - Engine: [pygame](https://www.pygame.org).
 
-![Versão 2.0](docs/versao-2.0.png)
+ <br>
+<p align="center">
+  <img src="docs/versao-2.0.png" alt="[Versão 2.0]" width="300">
+  <br>
+  <em>Versão 2.0: tela adaptada para celular.</em>
+</p>
 
-*Versão 2.0: tela adaptada para celular.*
